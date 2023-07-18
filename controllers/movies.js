@@ -8,7 +8,8 @@ const {
 } = require('../utils/consts');
 
 const getMovies = (req, res, next) => {
-  Movie.find({})
+  console.log('getMovies req', req.user);
+  Movie.find({owner: {$eq : req.user._id}})
     .then((movies) => {
       res.status(STATUS_OK).send(movies);
     })
@@ -18,10 +19,34 @@ const getMovies = (req, res, next) => {
 };
 
 const createMovie = (req, res, next) => {
-  const { name, link } = req.body;
-  return Movie.create({ name, link, owner: req.user._id })
-    .then((createdCard) => {
-      res.status(CREATED).send(createdCard);
+  const {
+    country,
+    director,
+    duration,
+    year,
+    description,
+    image,
+    trailerLink,
+    nameRU,
+    nameEN,
+    thumbnail,
+    movieId
+  } = req.body;
+  return Movie.create({
+    country,
+    director,
+    duration,
+    year,
+    description,
+    image,
+    trailerLink,
+    nameRU,
+    nameEN,
+    thumbnail,
+    movieId,
+     owner: req.user._id })
+    .then((createdMovie) => {
+      res.status(CREATED).send(createdMovie);
     })
     .catch(next);
 };

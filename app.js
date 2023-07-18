@@ -3,6 +3,8 @@ const mongoose = require('mongoose');
 const helmet = require('helmet');
 const cors = require('cors');
 const { errors } = require('celebrate');
+const errorHandler = require('./middlewares/error-handler');
+
 const {
   login,
   createUser,
@@ -13,7 +15,6 @@ const {
 } = require('./middlewares/validation');
 const NotFoundError = require('./errors/not-found-err');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
-
 require('dotenv').config();
 
 const { PORT = 3000 } = process.env;
@@ -48,6 +49,7 @@ app.use((req, res, next) => {
 });
 app.use(errorLogger);
 app.use(errors()); // обработчик ошибок celebrate
+// app.use(errorHandler);
 app.use((err, req, res, next) => {
   const { statusCode = 500, message } = err;
   res.status(statusCode).send({
