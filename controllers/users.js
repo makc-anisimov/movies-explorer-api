@@ -47,10 +47,6 @@ const createUser = (req, res, next) => {
       });
     })
     .catch(next);
-    // .catch(() => {
-    //   const err = new ConflictError('Такой email уже зарегистрирован');
-    //   next(err);
-    // });
 };
 
 const updateProfile = (req, res, next) => {

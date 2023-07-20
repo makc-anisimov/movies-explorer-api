@@ -1,22 +1,17 @@
 const router = require('express').Router();
-// const auth = require('../middlewares/auth');
 const {
   updateProfileValidation,
 } = require('../middlewares/validation');
-const errorHandler = require('../middlewares/error-handler');
 
 const {
   getUserMe,
   updateProfile,
 } = require('../controllers/users');
 
-// # возвращает информацию о пользователе (email и имя)
-// GET /users/me
+// GET /users/me # возвращает информацию о пользователе (email и имя)
 router.get('/me', getUserMe);
-// # обновляет информацию о пользователе (email и имя)
-// PATCH /users/me
-router.patch('/me', updateProfileValidation, updateProfile);
-// router.use(errorHandler);
 
+// PATCH /users/me # обновляет информацию о пользователе (email и имя)
+router.patch('/me', updateProfileValidation, updateProfile);
 
 module.exports = router;
