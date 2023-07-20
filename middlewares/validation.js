@@ -39,13 +39,13 @@ const createMovieValidation = celebrate({
     nameRU: Joi.string().required(),
     nameEN: Joi.string().required(),
     thumbnail: Joi.string().required().pattern(REGEXP_LINK),
-    movieId: Joi.string().required().hex(),
+    movieId: Joi.string().required().hex().length(24),
   }),
 });
 
-const deletMovieValidation = celebrate({
+const deleteMovieValidation = celebrate({
   params: Joi.object().keys({
-    movieId: Joi.string().required().hex(),
+    movieId: Joi.string().required().hex().length(24),
   }),
 });
 
@@ -54,5 +54,5 @@ module.exports = {
   createUserValidation,
   updateProfileValidation,
   createMovieValidation,
-  deletMovieValidation
+  deleteMovieValidation
 };

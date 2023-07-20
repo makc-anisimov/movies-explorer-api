@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const auth = require('../middlewares/auth');
+// const auth = require('../middlewares/auth');
 const {
   updateProfileValidation,
 } = require('../middlewares/validation');
@@ -12,11 +12,11 @@ const {
 
 // # возвращает информацию о пользователе (email и имя)
 // GET /users/me
-router.get('/me', auth, getUserMe);
+router.get('/me', getUserMe);
 // # обновляет информацию о пользователе (email и имя)
 // PATCH /users/me
-router.patch('/me', auth, updateProfileValidation, updateProfile);
-router.use(errorHandler);
+router.patch('/me', updateProfileValidation, updateProfile);
+// router.use(errorHandler);
 
 
 module.exports = router;

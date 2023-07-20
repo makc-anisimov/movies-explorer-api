@@ -46,10 +46,11 @@ const createUser = (req, res, next) => {
         _id: createdUser._id,
       });
     })
-    .catch(() => {
-      const err = new ConflictError('Такой email уже зарегистрирован');
-      next(err);
-    });
+    .catch(next);
+    // .catch(() => {
+    //   const err = new ConflictError('Такой email уже зарегистрирован');
+    //   next(err);
+    // });
 };
 
 const updateProfile = (req, res, next) => {

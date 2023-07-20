@@ -1,8 +1,8 @@
 const router = require('express').Router();
-const auth = require('../middlewares/auth');
+// const auth = require('../middlewares/auth');
 const {
   createMovieValidation,
-  deletMovieValidation,
+  deleteMovieValidation,
 } = require('../middlewares/validation');
 
 const {
@@ -14,15 +14,15 @@ const {
 
 // # возвращает все сохранённые текущим  пользователем фильмы
 // GET /movies
-router.get('/', auth, getMovies);
+router.get('/', getMovies);
 
 // # создаёт фильм с переданными в теле
 // # country, director, duration, year, description, image, trailer, nameRU, nameEN и thumbnail, movieId
 // POST /movies
-router.post('/', auth, createMovieValidation, createMovie);
+router.post('/', createMovieValidation, createMovie);
 
 // # удаляет сохранённый фильм по id
 // DELETE /movies/_id
-router.delete('/:movieId', auth, deletMovieValidation, deleteMovie);
+router.delete('/:movieId', deleteMovieValidation, deleteMovie);
 
 module.exports = router;
