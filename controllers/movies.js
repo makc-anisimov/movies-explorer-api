@@ -8,7 +8,7 @@ const {
 } = require('../utils/consts');
 
 const getMovies = (req, res, next) => {
-  console.log('getMovies req', req.user);
+  // console.log('getMovies req', req.user);
   Movie.find({owner: {$eq : req.user._id}})
     .then((movies) => {
       res.status(STATUS_OK).send(movies);
@@ -53,7 +53,7 @@ const createMovie = (req, res, next) => {
 
 const deleteMovie = (req, res, next) => {
   const { movieId } = req.params;
-  Movie.findById(movieId)
+  Movie.findById(movieId.toString())
     .then((movie) => {
       if (!movie) {
         throw new NotFoundError('Фильм с указанным _id не найден');
